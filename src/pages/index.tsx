@@ -16,18 +16,25 @@ function App() {
   //   setGreetMsg(await invoke("greet", { name }));
   // }
   const addTask = ((task) => {
+    console.log(task)
     setTasks([...tasks, {title:task}])
+    setTaskInput('')
   }) 
-  
 
+  const deleteTask = ((task) => { 
+    console.log(task)
+    let tasksBuffer= tasks
+    tasksBuffer.splice(task,1)
+    setTasks([...tasksBuffer])
+  })
   return (
-    <div className="container">
+    <div className="container" >
       <h1>Welcome to Tauri!</h1>
       <form onSubmit={e=> e.preventDefault()}>
         <input type="text" value={taskInput} onChange={e=>setTaskInput(e.target.value)}/>
         <button type="submit" onClick={e => addTask(taskInput)} />
       </form>
-      <TodoList tasks={tasks}></TodoList>
+      <TodoList deleteTask={deleteTask} tasks={tasks}/>
     </div>
   );
 }
