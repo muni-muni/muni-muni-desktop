@@ -3,13 +3,13 @@ export function TodoList({tasks,deleteTask}) {
     return (
         <div>
             <p>
-                Hello world, I have once again arrived
+                Please Write down your tasks for tommorrow
             </p>
             <ol>
             {
                 tasks.map((item, index)=> {
                 return <li key={index}>{item.title}
-                    <button onClick={() => {deleteTask(index)}}/>
+                    <button onClick={() => {deleteTask(index)}}> X </button>
                     </li>
                 })
             }

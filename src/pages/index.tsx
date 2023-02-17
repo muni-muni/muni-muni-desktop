@@ -5,10 +5,36 @@ import { useState } from "react";
 // import tauriLogo from "../assets/tauri.svg";
 // import nextLogo from "../assets/next.svg";
 import { TodoList } from "../app/todo";
+import { BaseDirectory, createDir } from "@tauri-apps/api/fs";
 
 function App() {
   // const [greetMsg, setGreetMsg] = useState("");
   // const [name, setName] = useState("");
+  const createDataFolder = async () => {
+    try {
+      await createDir("data", {
+        dir: BaseDirectory.Desktop,
+        recursive: true,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  const createDataFile = async () => {
+    try {
+      await writeFile(
+        {
+          contents: "[]",
+          path: `./data/data.json`,
+        },
+        {
+          dir: dir,
+        }
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const [tasks, setTasks] = useState([{title:"get a load of this guy"}])
   const [taskInput, setTaskInput] = useState('')
   // async function greet() {
